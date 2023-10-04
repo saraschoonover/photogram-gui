@@ -12,99 +12,65 @@
     <h1>Photo Details</h1>
 
 <dl>
-  <dt>
-    Image
-  </dt>
-  <dd>
-    <img src="<%= @the_photo.image %>" height="300px">
-  </dd>
-
-  <dt>
-    Caption
-  </dt>
-  <dd>
-    <p>
-       <%= @the_photo.caption %>
-    </p>
-  </dd>
-
-  <dt>
-    Owner
-  </dt>
-  <dd>
-     <%= @the_photo.poster.username %>
-  </dd>
-
-  <dt>
-    Posted
-  </dt>
-  <dd>
-    <%= @the_photo.created_at %>
-  </dd>
+  <dt>Image</dt>
+  <dd><img src="<%= @the_photo.image %>" height="300px" /></dd>
+  <dt>Caption</dt>
+  <dd><p><%= @the_photo.caption %></p></dd>
+  <dt>Owner</dt>
+  <dd><%= @the_photo.poster.username %></dd>
+  <dt>Posted</dt>
+  <dd><%= @the_photo.created_at %></dd>
+</dl>
 <hr>
 
-  <dt>
-    Edit photo
-  </dt>
-  <dd>
-    <form action="/update_photo/777" method="post">
-      <label for="browser_image">Image</label>
-      <input id="browser_image" type="text" name="input_image" placeholder="Enter a URL for the image..." value="<%= @the_photo.image %>">
-
-      <label for="browser_caption">Caption</label>
-      <textarea id="browser_caption" name="input_caption" placeholder="Enter a caption for the photo..."><%= @the_photo.caption %></textarea>
-
-      <button>Update photo</button>
+<dt>Edit photo</dt>
+<dd>
+  <form action="/modify_photo/<%= @the_photo.id %>" method="post">
+    <label for="browser_image">Image</label>
+    <input id="browser_image" type="text" name="input_image" placeholder="Enter a URL for theimage..." value="<%= @the_photo.image %>">
+    <label for="browser_caption">Caption</label>
+    <textarea id="browser_caption" name="input_caption" placeholder="Enter a caption for thephoto..."><%= @the_photo.caption %></textarea>
+    <button>Update photo</button>
     </form>
-  </dd>
+</dd>
 
-  <dt>
-    Delete photo
-  </dt>
-  <dd>
-    <a href="/delete_photo/777">
-      Delete this photo
-    </a>
-  </dd>
-</dl>
+<dt> Delete photo</dt>
+<dd><a href="/delete_photo/">Delete this photo</a></dd>
+
 <br>
+
 <h2>Comments</h2>
+  
+ 
 <br>
 <table>
   <tr>
     <th>
-      Commenter
+      commenter
+      
     </th>
 
     <th>
-      Comment
+      
     </th>
 
     <th>
-      Posted
+    Author ID
+     
     </th>
   </tr>
 
-
-    <tr>
-      <td>
-        robin
-      </td>
-
-      <td>
-        The mind is not a vessel to be filled but a fire to be kindled.
-      </td>
-
-      <td>
-        2019-04-29 22:16:30 UTC
-      </td>
-    </tr>
-
+  <% @the_photo.comments.each do |comment| %>
+    
+    <p>
+      <%= comment.commenter.username %>
+    </p>
+  <% end %>
 <h3>Add a new comment</h3>
 
 <form action="/add_comment" method="post">
   <label for="browser_photo_id">Photo ID</label>
-  <input id="browser_photo_id" type=text placeholder="Enter the photo ID" name="input_photo_id" value=777>
+  <input id="browser_photo_id" type=text placeholder="Enter the photo ID" name="input_photo_id" value="">
 
   <label for="browser_author_id">Author ID</label>
   <input id="browser_author_id" type=text placeholder="Enter your author ID" name="input_author_id">

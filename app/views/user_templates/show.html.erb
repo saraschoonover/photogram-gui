@@ -23,7 +23,7 @@
     Edit user
   </dt>
   <dd>
-    <form action="/update_user/117" method="post">
+    <form action="/modify_user/<%= @the_user.username %>" method="post">
       <label for="browser_username">Username</label>
       <input id="browser_username" type="text" name="input_username" value="<%= @the_user.username %>">
 
@@ -32,7 +32,7 @@
   </dd>
 </dl>
 
-<h2>Own photos (0)</h2>
+<h2>Own photos <%= @the_user.own_photos.count %></h2>
 
 <table border="1">
   <tr>
@@ -55,5 +55,18 @@
     <th>
     </th>
   </tr>
+  <% @the_user.own_photos.each do |photo| %>
+      <dl>
+      <dt>Image</dt>
+      <dd><img src="<%= photo.image%>" height="300px" /></dd>
+      <dt>Caption</dt>
+      <dd><p><%= photo.caption %></p></dd>
+      <dt>Owner</dt>
+      <dd><%= @the_user.username %></dd>
+      <dt>Posted</dt>
+      <dd><%= photo.created_at %></dd>
+    </dl>
+  <% end %>
+<hr>
 
 </table>
