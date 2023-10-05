@@ -44,6 +44,6 @@ class UsersController < ApplicationController
     @the_user = User.find(the_id)
     @the_user.destroy
 
-    redirect_to("/users", { :notice => "Director deleted successfully."} )
+    redirect_to("/users", { :notice => "user deleted successfully."} )
   end
 end

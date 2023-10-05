@@ -35,7 +35,7 @@
 </dd>
 
 <dt> Delete photo</dt>
-<dd><a href="/delete_photo/">Delete this photo</a></dd>
+<dd><a href="/delete_photo/<%= @the_photo.id %>">Delete this photo</a></dd>
 
 <br>
 
@@ -59,18 +59,25 @@
      
     </th>
   </tr>
+  </table>
 
   <% @the_photo.comments.each do |comment| %>
     
-    <p>
-      <%= comment.commenter.username %>
-    </p>
+   <table>
+  <tr>
+    <th><%= comment.commenter.username %></th>
+
+    <th><%= comment.body %> </th>
+
+    <th><%= comment.created_at %> </th>
+  </tr>
+  </table>
   <% end %>
 <h3>Add a new comment</h3>
 
 <form action="/add_comment" method="post">
   <label for="browser_photo_id">Photo ID</label>
-  <input id="browser_photo_id" type=text placeholder="Enter the photo ID" name="input_photo_id" value="">
+  <input id="browser_photo_id" type=text placeholder="Enter the photo ID" name="input_photo_id" value="<%= @the_photo.id %>">
 
   <label for="browser_author_id">Author ID</label>
   <input id="browser_author_id" type=text placeholder="Enter your author ID" name="input_author_id">

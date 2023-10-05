@@ -42,5 +42,20 @@ class PhotosController < ApplicationController
   end
 
   def destroy
+    the_id = params.fetch("path_id")
+    @the_comment = Photo.find(the_id)
+    @the_comment.destroy
+
+    redirect_to("/photos", { :notice => "user deleted successfully."} )
+  end
+
+  def create_comment
+    @new_comment = Comment.new
+    @new_comment.photo_id = params.fetch("input_photo_id")
+    @new_comment.author_id= params.fetch("input_author_id")
+    @new_comment.body = params.fetch("input_comment")
+    @new_comment.save
+
+    redirect_to("/photos/#{@new_comment.photo_id}")
   end
 end
